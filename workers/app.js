@@ -11,7 +11,7 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public/service-workers.html'));
 });
 
-const fatherTedRouter = require('./public/js/routes/father-ted-routes')();
+const fatherTedRouter = require('./src/routes/father-ted-routes')();
 
 app.use('/fatherted', fatherTedRouter);
 
