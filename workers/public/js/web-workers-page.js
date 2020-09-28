@@ -5,11 +5,22 @@ worker.addEventListener('message', function (e) {
 });
 
 const postCharacterResult = (quote, type) => {
+  const blockQuote = document.createElement('blockquote');
+  blockQuote.classList.add('blockquote');
+
   const p = document.createElement('p');
-  p.innerHTML=`"${quote.quote}" - ${quote.characters.toString()}`;
+  p.classList.add('mb-0');
+  p.innerHTML= quote.quote;
+
+  const footer = document.createElement('footer');
+  footer.classList.add('blockquote-footer');
+  footer.innerHTML= quote.characters.toString(', ');
+
+  blockQuote.appendChild(p);
+  blockQuote.appendChild(footer);
 
   const column = document.getElementById(`${type}-column`);
-  column.appendChild(p);
+  column.appendChild(blockQuote);
 };
 
 const getNormalQuote = async (character) => {
