@@ -6,7 +6,18 @@
     <title>Workers Examples</title>
     <!-- CSS only -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <script defer type="module" src="js/web-workers-page.js"></script>
+    <script defer type="module" src="js/worklets-page.js"></script>
+    <script>
+      if ('paintWorklet' in CSS) {
+        CSS.paintWorklet.addModule('js/paint-worklet.js');
+      }
+    </script>
+    <style>
+      div#quotes p {
+        background-image: url(checkerboard);
+        background-image: paint(checkerboard);
+      }
+    </style>
   </head>
   <body>
     <div class="container">
@@ -25,25 +36,13 @@
           </ul>
         </nav>
       </header>
-      <div class="row border-bottom">
-        <div id="normal-column" class="col border-right">
-          <h3>Normal</h3>
-          <div class="input-group mb-3">
-            <input id="normal-input" type="text" class="form-control" placeholder="Character" aria-label="Character">
-            <div class="input-group-append">
-              <button id="normal-button" class="btn btn-outline-primary" type="button">Get Quote</button>
-            </div>
-          </div>
+      <div class="input-group mb-3">
+        <input id="quote-input" type="text" class="form-control" placeholder="Character" aria-label="Character">
+        <div class="input-group-append">
+          <button id="quote-button" class="btn btn-outline-primary" type="button">Get Quote</button>
         </div>
-        <div id="web-worker-column" class="col">
-          <h3>Web Worker</h3>
-          <div class="input-group mb-3">
-            <input id="web-worker-input" type="text" class="form-control" placeholder="Character" aria-label="Character">
-            <div class="input-group-append">
-              <button id="web-worker-button" class="btn btn-outline-primary" type="button">Get Quote</button>
-            </div>
-          </div>
-        </div>
+      </div>
+      <div id="quotes">
       </div>
     </div>
   </body>
