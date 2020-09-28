@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-const quotesURL = 'https://api.fatherted.irish/quotes';
+const fathertedapi = 'https://api.fatherted.irish';
 
 const quotesConverter = (quotes) => {
   return { quotes: quotes.map(quote => quote.quote), 'text-blocks': quotes.map(quote => quote.episode) }
@@ -8,10 +8,18 @@ const quotesConverter = (quotes) => {
 
 const fatherTedService = () => {
   const getFatherTedQuotes = () => {
-    return axios.get(quotesURL).then(response => quotesConverter(response.data));
+    return axios.get(fathertedapi + '/quotes').then(response => quotesConverter(response.data));
   };
 
-  return { getFatherTedQuotes };
+  const randomFatherTedQuote = () => {
+    return axios.get(fathertedapi + '/quotes/random').then(response => response.data);
+  };
+
+  const randomCharacterQuote = (character) => {
+    return axios.get(`${fathertedapi}/quotes/random?character=${character}`).then(response => response.data);
+  };
+
+  return { getFatherTedQuotes, randomFatherTedQuote, randomCharacterQuote };
 }
 
 module.exports =  fatherTedService();
