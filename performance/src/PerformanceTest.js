@@ -29,8 +29,11 @@ export const PerformanceTest = () => {
             <Box m={2}> 
                 <Button variant="contained" color="primary" onClick={() => runTests()}>Submit</Button>
             </Box>
-            <strong>{`Average: ${(results.reduce((a, b) => (a + b)) / results.length).toFixed(4)} milliseconds to generate.`}</strong>
-            {results.map((result, index) => {
+            {results.length > 0 &&
+                <strong>{`Average: ${(results.reduce((a, b) => (a + b)) / results.length).toFixed(4)} milliseconds to generate.`}</strong>
+            }
+            {
+            results.map((result, index) => {
                 if (index === 0) {
                     return <del><p key = {index}>{`Run ${index} took ${result.toFixed(4)} milliseconds to generate.`}</p></del>
                 } 
